@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #060CE9;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 5px;
+            padding: 20px;
+        }
+
+        .category {
+            background-color: #00008B;
+
+            padding: 7px;
+            font-weight: bold;
+            border: 2px solid white;
+
+        }
+
+        .cell {
+            background-color: #0000CD;
+
+            padding: 30px 10px;
+            font-size: 24px;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+
+        .cell:hover {
+            background-color: #1E90FF;
+        }
+
+
+        .question-box {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .question {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Jeopardy Game</h1>
+
+    <div class="board">
+        <!-- Categories -->
+        <div class="category">Copyright Infridgment</div>
+        <div class="category">Algorithmic Promotion</div>
+        <div class="category">Harm to Artists</div>
+        <div class="category">Category 4</div>
+        <div class="category">Category 5</div>
+        <div class="category">Category 6</div>
+
+        <!-- Row 1 (100)-->
+        <div class="cell" onclick="showQuestion(this, 'What is AI?',
+            'AI is bad')">$100</div>
+            
+        <div class="cell" onclick="showQuestion(this, 'Question 2', 'Answer 2')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 3', '')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 4')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 5')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 6')">$100</div>
+
+        <!-- Row 2 (200) -->
+        <div class="cell" onclick="showQuestion(this, 'Question 7')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 8')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 9')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 10')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 11')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 12')">$200</div>
+
+        <!-- Row 3 (300)-->
+        <div class="cell" onclick="showQuestion(this, 'Question 7')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 8')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 9')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 10')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 11')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 12')">$300</div>
+
+        <!-- Add more rows as needed -->
+    </div>
+
+    <div id="questionBox" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  color: white;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;">
+
+        <div id="questionText" style="font-size: 32px; margin-bottom: 20px;"></div>
+        <div id="answerText" style="font-size: 24px; margin-bottom: 20px; display:none;"></div>
+        <button id="showAnswerBtn" onclick="showAnswer()">Show Answer</button>
+        <button onclick="closeQuestion()">Close</button>
+    </div>
+
+    <script>
+        let currentCell = null;
+
+        function showQuestion(cell, question, answer) {
+            currentCell = cell;
+
+            document.getElementById("questionText").innerText = question;
+            document.getElementById("answerText").innerText = answer;
+            document.getElementById("answerText").style.display = "none";
+
+            const btn = document.getElementById("showAnswerBtn");
+            if (btn) btn.style.display = "inline-block";
+
+            const box = document.getElementById("questionBox");
+            box.style.display = "flex";
+        }
+
+        function closeQuestion() {
+            const box = document.getElementById("questionBox");
+            box.style.display = "none";
+
+            if (currentCell) {
+                currentCell.innerText = "";
+                currentCell.style.pointerEvents = "none";
+            }
+
+            currentCell = null;
+        }
+
+        // Ensure overlay is hidden on page load
+        window.onload = function () {
+            const box = document.getElementById('questionBox');
+            if (box) {
+                box.style.display = 'none';
+            }
+        }
+
+        function showAnswer() {
+            document.getElementById("answerText").style.display = "block";
+            const btn = document.getElementById("showAnswerBtn");
+            if (btn) btn.style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>

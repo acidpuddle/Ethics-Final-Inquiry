@@ -82,43 +82,42 @@
 
     <div class="board">
         <!-- Categories -->
-        <div class="category">Copyright Infridgment</div>
-        <div class="category">Algorithmic Promotion</div>
-        <div class="category">Harm to Artists</div>
-        <div class="category">Category 4</div>
-        <div class="category">Category 5</div>
-        <div class="category">Category 6</div>
+        <div class="category">Why does it Matter?</div>
+        <div class="category">Economic Effects</div>
+        <div class="category">Affect on Artists</div>
+        <div class="category">Emotional Authenticity 4</div>
+        <div class="category">Algorithimic Promotion</div>
+        <div class="category">Impact on Culture and Media</div>
 
         <!-- Row 1 (100)-->
-        <div class="cell" onclick="showQuestion(this, 'What is AI?',
-            'AI is bad')">$100</div>
-            
-        <div class="cell" onclick="showQuestion(this, 'Question 2', 'Answer 2')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 3', '')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 4')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 5')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 6')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 1A','Answer 1A')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 2A','Answer 2A')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 3A','Answer 3A')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 4A','Answer 4A')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 5A','Answer 5A')">$100</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 6A','Answer 6A')">$100</div>
 
         <!-- Row 2 (200) -->
-        <div class="cell" onclick="showQuestion(this, 'Question 7')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 8')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 9')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 10')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 11')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 12')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 1B','Answer 1B')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 2B','Answer 2B')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 3B','Answer 3B')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 4B','Answer 4B')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 5B','Answer 5B')">$200</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 6B','Answer 6B')">$200</div>
 
         <!-- Row 3 (300)-->
-        <div class="cell" onclick="showQuestion(this, 'Question 7')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 8')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 9')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 10')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 11')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 12')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 1C','Answer 1C')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 2C','Answer 2C')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 3C','Answer 3C')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 4C','Answer 4C')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 5C','Answer 5C')">$300</div>
+        <div class="cell" onclick="showQuestion(this, 'Question 6C','Answer 6C')">$300</div>
 
         <!-- Add more rows as needed -->
     </div>
 
-    <div id="questionBox" style="
+  <!-- Style -->
+  <div id="questionBox" style="
   display: none;
   position: fixed;
   top: 0;
@@ -167,7 +166,7 @@
             currentCell = null;
         }
 
-        // Ensure overlay is hidden on page load
+        // Hide overlay on page load
         window.onload = function () {
             const box = document.getElementById('questionBox');
             if (box) {

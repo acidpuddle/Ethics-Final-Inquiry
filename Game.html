@@ -1,184 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeopardy Game</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeopardy Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #060CE9;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+<script src="script.js"></script>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #060CE9;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-        h1 {
-            margin: 20px 0;
-        }
+h1 {
+    margin: 20px 0;
+}
 
-        .board {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 5px;
-            padding: 20px;
-        }
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    padding: 20px;
+}
 
-        .category {
-            background-color: #00008B;
+.category {
+    background-color: #00008B;
+    padding: 7px;
+    font-weight: bold;
+    border: 2px solid white;
+}
 
-            padding: 7px;
-            font-weight: bold;
-            border: 2px solid white;
+.cell {
+    background-color: #0000CD;
+    padding: 30px 10px;
+    font-size: 24px;
+    border: 2px solid white;
+    cursor: pointer;
+}
 
-        }
+.cell:hover {
+    background-color: #1E90FF;
+}
 
-        .cell {
-            background-color: #0000CD;
+#questionBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
 
-            padding: 30px 10px;
-            font-size: 24px;
-            border: 2px solid white;
-            cursor: pointer;
-        }
+#questionText {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
 
-        .cell:hover {
-            background-color: #1E90FF;
-        }
+#answerText {
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: none;
+}
 
-
-        .question-box {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .question {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-    </style>
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 5px;
+}
+</style>
 </head>
 
-<body>
+<body dir="ltr" spellcheck="false" style="direction: ltr; min-height: 901px;">
 
-    <h1>Jeopardy Game</h1>
+<h1>Jeopardy Game</h1>
 
-    <div class="board">
-        <!-- Categories -->
-        <div class="category">Why does it Matter?</div>
-        <div class="category">Economic Effects</div>
-        <div class="category">Affect on Artists</div>
-        <div class="category">Emotional Authenticity 4</div>
-        <div class="category">Algorithimic Promotion</div>
-        <div class="category">Impact on Culture and Media</div>
+<div class="board">
 
-        <!-- Row 1 (100)-->
-        <div class="cell" onclick="showQuestion(this, 'Question 1A','Answer 1A')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 2A','Answer 2A')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 3A','Answer 3A')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 4A','Answer 4A')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 5A','Answer 5A')">$100</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 6A','Answer 6A')">$100</div>
+<!-- Categories -->
+<div class="category">Why does it Matter?</div>
+<div class="category">Economic Effects</div>
+<div class="category">Affect on Artists</div>
+<div class="category">Emotional Authenticity</div>
+<div class="category">Algorithmic Promotion</div>
+<div class="category">Impact on Culture and Media</div>
 
-        <!-- Row 2 (200) -->
-        <div class="cell" onclick="showQuestion(this, 'Question 1B','Answer 1B')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 2B','Answer 2B')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 3B','Answer 3B')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 4B','Answer 4B')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 5B','Answer 5B')">$200</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 6B','Answer 6B')">$200</div>
+<!-- Row 1 -->
+<div class="cell" data-question="Question 1A" data-answer="Answer 1A">$100</div>
+<div class="cell" data-question="Question 2A" data-answer="Answer 2A">$100</div>
+<div class="cell" data-question="Question 3A" data-answer="Answer 3A">$100</div>
+<div class="cell" data-question="Question 4A" data-answer="Answer 4A">$100</div>
+<div class="cell" data-question="Question 5A" data-answer="Answer 5A">$100</div>
+<div class="cell" data-question="Question 6A" data-answer="Answer 6A">$100</div>
 
-        <!-- Row 3 (300)-->
-        <div class="cell" onclick="showQuestion(this, 'Question 1C','Answer 1C')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 2C','Answer 2C')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 3C','Answer 3C')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 4C','Answer 4C')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 5C','Answer 5C')">$300</div>
-        <div class="cell" onclick="showQuestion(this, 'Question 6C','Answer 6C')">$300</div>
+<!-- Row 2 -->
+<div class="cell" data-question="Question 1B" data-answer="Answer 1B">$200</div>
+<div class="cell" data-question="Question 2B" data-answer="Answer 2B">$200</div>
+<div class="cell" data-question="Question 3B" data-answer="Answer 3B">$200</div>
+<div class="cell" data-question="Question 4B" data-answer="Answer 4B">$200</div>
+<div class="cell" data-question="Question 5B" data-answer="Answer 5B">$200</div>
+<div class="cell" data-question="Question 6B" data-answer="Answer 6B">$200</div>
 
-    </div>
+<!-- Row 3 -->
+<div class="cell" data-question="Question 1C" data-answer="Answer 1C">$300</div>
+<div class="cell" data-question="Question 2C" data-answer="Answer 2C">$300</div>
+<div class="cell" data-question="Question 3C" data-answer="Answer 3C">$300</div>
+<div class="cell" data-question="Question 4C" data-answer="Answer 4C">$300</div>
+<div class="cell" data-question="Question 5C" data-answer="Answer 5C">$300</div>
+<div class="cell" data-question="Question 6C" data-answer="Answer 6C">$300</div>
 
-  <!-- Style -->
-  <div id="questionBox" style="
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  color: white;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 9999;">
+</div>
 
-        <div id="questionText" style="font-size: 32px; margin-bottom: 20px;"></div>
-        <div id="answerText" style="font-size: 24px; margin-bottom: 20px; display:none;"></div>
-        <button id="showAnswerBtn" onclick="showAnswer()">Show Answer</button>
-        <button onclick="closeQuestion()">Close</button>
-    </div>
+<!-- Q/A-->
+<div id="questionBox">
+    <div id="questionText"><br></div>
+    <div id="answerText"><br></div>
+    <button id="showAnswerBtn">Show Answer</button>
+    <button id="closeBtn">Close</button>
+</div>
 
-    <script>
-        let currentCell = null;
-
-        function showQuestion(cell, question, answer) {
-            currentCell = cell;
-
-            document.getElementById("questionText").innerText = question;
-            document.getElementById("answerText").innerText = answer;
-            document.getElementById("answerText").style.display = "none";
-
-            const btn = document.getElementById("showAnswerBtn");
-            if (btn) btn.style.display = "inline-block";
-
-            const box = document.getElementById("questionBox");
-            box.style.display = "flex";
-        }
-
-        function closeQuestion() {
-            const box = document.getElementById("questionBox");
-            box.style.display = "none";
-
-            if (currentCell) {
-                currentCell.innerText = "";
-                currentCell.style.pointerEvents = "none";
-            }
-
-            currentCell = null;
-        }
-        
-        window.onload = function () {
-            const box = document.getElementById('questionBox');
-            if (box) {
-                box.style.display = 'none';
-            }
-        }
-
-        function showAnswer() {
-            document.getElementById("answerText").style.display = "block";
-            const btn = document.getElementById("showAnswerBtn");
-            if (btn) btn.style.display = "none";
-        }
-    </script>
-
-</body>
-
-</html>
+</body></html>
